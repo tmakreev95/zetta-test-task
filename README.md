@@ -1,3 +1,6 @@
+# Installation
+1. npm install
+2. ng s
 # ZettaTestTask
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
