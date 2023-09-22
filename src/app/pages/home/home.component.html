@@ -1,0 +1,35 @@
+<div class="row mt-3">
+  <ng-container *ngIf="loading">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border m-5"
+        role="status">
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && (games | filterGames:filter) as gamesFiltered">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 mb-3"
+      *ngFor="let game of gamesFiltered">
+      <div class="game">
+        <div>
+          <h5>
+            {{ game.title }}
+          </h5>
+        </div>
+        <img [src]="game.image"
+          [alt]="game.title">
+      </div>
+    </div>
+
+    <div class="col-12 text-left"
+      *ngIf="!gamesFiltered.length">
+      <h2 class="text-gray">
+        Nothing was found for this query. Please change the query.
+      </h2>
+      <span class="text-danger cursor-pointer fs-4"
+        (click)="resetFilter()">
+        Reset filter
+      </span>
+    </div>
+  </ng-container>
+</div>

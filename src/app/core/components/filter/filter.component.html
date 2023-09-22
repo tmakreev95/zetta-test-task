@@ -1,0 +1,170 @@
+<div class="d-flex flex-row bg-secondary align-items-center py-2 filter-row justify-content-sm-start flex-nowrap">
+  <div
+    class="px-2 d-flex flex-sm-grow-0 flex-grow-1 flex-grow-lg-1 order-1 order-sm-1 order-md-1 order-lg-1 order-xl-1">
+    <ng-container [ngTemplateOutlet]="categoryFullWidthFiltersTemplate"></ng-container>
+    <ng-container [ngTemplateOutlet]="categoryFiltersTemplate"></ng-container>
+  </div>
+
+  <div class="px-2 d-flex flex-grow-0 order-2 order-sm-3 order-md-2 order-lg-2 order-xl-2 flex-nowrap"
+    id="dropdown-filters"
+    *ngIf="!showFiltersBelow">
+    <ng-container [ngTemplateOutlet]="dropdownFiltersTemplate"></ng-container>
+  </div>
+
+  <div id="input-filter-col"
+    class="px-2 d-flex flex-sm-grow-1 flex-grow-0 order-2 order-md-3 order-sm-2 order-lg-3 order-xl-3">
+    <form class="w-100">
+      <div class="input-group border-0 bg-secondary-bg-subtle rounded-element"
+        id="search-input-group">
+        <span class="input-group-text border-0 bg-secondary-bg-subtle rounded-element"
+          id="search-icon-addon">
+          <span class="search-icon"></span>
+        </span>
+        <input type="text"
+          [(ngModel)]="searchTerm"
+          [ngModelOptions]="{standalone: true}"
+          (input)="searchTermInputChange($event)"
+          id="search-input"
+          class="form-control border-0 bg-secondary-bg-subtle rounded-element"
+          placeholder="Search for game or provider"
+          aria-label="Search Term"
+          aria-describedby="search-icon-addon">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="dropdown-filters-mobile"
+  class="d-flex flex-row bg-secondary align-items-center py-2  filter-row mt-3 px-2 flex-nowrap align-content-stretch flex-wrap"
+  *ngIf="showFiltersBelow">
+  <ng-container [ngTemplateOutlet]="dropdownFiltersTemplate"></ng-container>
+</div>
+
+<ng-template #dropdownFiltersTemplate>
+  <div class="dropdown"
+    id="providers-filter-dropdown">
+    <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
+      type="button"
+      id="dropdownMenuProviders"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <span class="dropdown-filter-label me-1">
+        By provider
+      </span>
+      <span class="me-1"
+        [ngClass]="{'text-primary': !!selectedProvider, 'text-white': !selectedProvider}">
+        {{ !!selectedProvider ? selectedProvider.name : 'all' }}
+      </span>
+      <span class="filter-toggle-icon"></span>
+    </button>
+
+    <ul class="dropdown-menu py-0 dropdown-shadow"
+      aria-labelledby="dropdownMenuProviders">
+      <li class="p-0">
+        <button class="btn border-0 w-100 option-label t-left"
+          (click)="setAllProviderFilter()"
+          [ngClass]="selectedProvider === null  ? 'option-label-selected' : 'bg-white'">
+          All
+        </button>
+      </li>
+      <li class="p-0"
+        *ngFor="let provider of providers">
+        <button class="btn border-0 w-100 t-left option-label"
+          (click)="setProviderFilter(provider)"
+          [ngClass]="selectedProvider?.id === provider.id  ? 'option-label-selected' : 'bg-white'">
+          <span class="providers-option-logo me-2"
+            [style.width]="'16px'"
+            [style.height]="'16px'"
+            [style.background-image]="getSafeURL(provider.logo)">
+          </span>
+          {{ provider.name }} ({{ providersGameMap.get(provider.id) }})
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="dropdown ms-3"
+    id="genres-filter-dropdown">
+    <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
+      type="button"
+      role="button"
+      id="dropdownMenuGenres"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <span class="dropdown-filter-label me-1">
+        By genre
+      </span>
+      <span class="me-1"
+        [ngClass]="{'text-primary': !!selectedGenre, 'text-white': !selectedGenre}">
+        {{ !!selectedGenre ? selectedGenre : 'all' }}
+      </span>
+      <span class="filter-toggle-icon"></span>
+
+    </button>
+
+    <ul class="dropdown-menu py-0 dropdown-shadow"
+      aria-labelledby="dropdownMenuGenres">
+      <li class="p-0">
+        <button class="btn border-0 w-100 option-label t-left"
+          (click)="setAllGenreFilter()"
+          [ngClass]="selectedGenre === null  ? 'option-label-selected' : 'bg-white'">
+          All
+        </button>
+      </li>
+      <li class="p-0"
+        *ngFor="let genre of genres">
+        <button class="btn border-0 w-100 t-left option-label"
+          (click)="setGenreFilter(genre)"
+          [ngClass]="selectedGenre === genre  ? 'option-label-selected' : 'bg-white'">
+          {{ genre }} ({{ genresGameMap.get(genre) }})
+        </button>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #categoryFiltersTemplate>
+  <div class="dropdown d-md-block d-lg-none">
+    <ul class="dropdown-menu py-0 dropdown-shadow">
+      <li class="p-0">
+        <button class="btn border-0 w-100 option-label t-left"
+          (click)="setAllCategoryFilter()"
+          [ngClass]="selectedCategory === null  ? 'option-label-selected' : 'bg-white'">
+          All
+        </button>
+      </li>
+      <li class="p-0"
+        *ngFor="let category of categories">
+        <button class="btn border-0 w-100 option-label t-left"
+          (click)="setCategoryFilter(category)"
+          [ngClass]="selectedCategory?.id === category.id  ? 'option-label-selected' : 'bg-white'">
+          {{ category.name }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #categoryFullWidthFiltersTemplate>
+  <button
+    class="btn btn-primary text-white dropdown-toggle d-sm-inline-flex d-lg-none rounded-element d-flex button-toggler"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    {{ !!selectedCategory ? selectedCategory.name : 'All'}}
+    <span class="category-toggle-icon ms-1"></span>
+  </button>
+  <div class="d-none d-lg-inline d-xl-inline">
+    <button class="btn btn-primary text-white border-0 py-2 me-1 rounded-element t-left"
+      [ngClass]="!selectedCategory ? 'btn-primary' : 'btn-secondary'"
+      (click)="setAllCategoryFilter()"
+      type="button">
+      All
+    </button>
+    <button class="btn text-white border-0 py-2 me-1 rounded-element t-left"
+      *ngFor="let category of categories"
+      (click)="setCategoryFilter(category)"
+      [ngClass]="selectedCategory?.id === category.id  ? 'btn-primary' : 'btn-secondary'">
+      {{ category.name }}
+    </button>
+  </div>
+</ng-template>
