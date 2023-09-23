@@ -5,32 +5,30 @@
     <ng-container [ngTemplateOutlet]="categoryFiltersTemplate"></ng-container>
   </div>
 
-  <div class="px-2 d-flex flex-grow-0 order-2 order-sm-3 order-md-2 order-lg-2 order-xl-2 flex-nowrap"
+  <div class="px-2 d-flex flex-grow-0 order-2 order-sm-2 order-md-2 order-lg-2 order-xl-2 flex-nowrap"
     id="dropdown-filters"
     *ngIf="!showFiltersBelow">
     <ng-container [ngTemplateOutlet]="dropdownFiltersTemplate"></ng-container>
   </div>
 
   <div id="input-filter-col"
-    class="px-2 d-flex flex-sm-grow-1 flex-grow-0 order-2 order-md-3 order-sm-2 order-lg-3 order-xl-3">
-    <form class="w-100">
-      <div class="input-group border-0 bg-secondary-bg-subtle rounded-element"
-        id="search-input-group">
-        <span class="input-group-text border-0 bg-secondary-bg-subtle rounded-element"
-          id="search-icon-addon">
-          <span class="search-icon"></span>
-        </span>
-        <input type="text"
-          [(ngModel)]="searchTerm"
-          [ngModelOptions]="{standalone: true}"
-          (input)="searchTermInputChange($event)"
-          id="search-input"
-          class="form-control border-0 bg-secondary-bg-subtle rounded-element"
-          placeholder="Search for game or provider"
-          aria-label="Search Term"
-          aria-describedby="search-icon-addon">
-      </div>
-    </form>
+    class="px-2 d-flex flex-sm-grow-1 flex-grow-0 order-2 order-md-3 order-sm-3 order-lg-3 order-xl-3">
+    <div class="input-group border-0 bg-secondary-bg-subtle rounded-element"
+      id="search-input-group">
+      <span class="input-group-text border-0 bg-secondary-bg-subtle rounded-element"
+        id="search-icon-addon">
+        <span class="search-icon"></span>
+      </span>
+      <input type="text"
+        [(ngModel)]="searchTerm"
+        [ngModelOptions]="{standalone: true}"
+        (input)="searchTermInputChange($event)"
+        id="search-input"
+        class="form-control border-0 bg-secondary-bg-subtle rounded-element"
+        placeholder="Search for game or provider"
+        aria-label="Search Term"
+        aria-describedby="search-icon-addon">
+    </div>
   </div>
 </div>
 
@@ -41,7 +39,7 @@
 </div>
 
 <ng-template #dropdownFiltersTemplate>
-  <div class="dropdown"
+  <div class="dropdown order-2"
     id="providers-filter-dropdown">
     <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
       type="button"
@@ -82,7 +80,7 @@
       </li>
     </ul>
   </div>
-  <div class="dropdown ms-3"
+  <div class="dropdown ms-3 order-1"
     id="genres-filter-dropdown">
     <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
       type="button"
@@ -123,7 +121,8 @@
 </ng-template>
 
 <ng-template #categoryFiltersTemplate>
-  <div class="dropdown d-md-block d-lg-none">
+  <div class="dropdown d-md-block d-lg-none"
+    id="category-filter-dropdown">
     <ul class="dropdown-menu py-0 dropdown-shadow">
       <li class="p-0">
         <button class="btn border-0 w-100 option-label t-left"
@@ -145,7 +144,7 @@
 </ng-template>
 
 <ng-template #categoryFullWidthFiltersTemplate>
-  <button
+  <button id="category-filter-button"
     class="btn btn-primary text-white dropdown-toggle d-sm-inline-flex d-lg-none rounded-element d-flex button-toggler"
     type="button"
     data-bs-toggle="dropdown"
@@ -153,7 +152,8 @@
     {{ !!selectedCategory ? selectedCategory.name : 'All'}}
     <span class="category-toggle-icon ms-1"></span>
   </button>
-  <div class="d-none d-lg-inline d-xl-inline">
+  <div class="d-none d-lg-inline d-xl-inline"
+    id="category-filter-holder">
     <button class="btn btn-primary text-white border-0 py-2 me-1 rounded-element t-left"
       [ngClass]="!selectedCategory ? 'btn-primary' : 'btn-secondary'"
       (click)="setAllCategoryFilter()"
