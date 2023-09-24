@@ -5,7 +5,7 @@
     <ng-container [ngTemplateOutlet]="categoryFiltersTemplate"></ng-container>
   </div>
 
-  <div class="px-2 d-flex flex-grow-0 order-2 order-sm-2 order-md-2 order-lg-2 order-xl-2 flex-nowrap"
+  <div class="px-2 d-flex flex-grow-0 order-2 order-sm-2 order-md-2 order-lg-2 order-xl-2 flex-nowrap flex-row-reverse"
     id="dropdown-filters"
     *ngIf="!showFiltersBelow">
     <ng-container [ngTemplateOutlet]="dropdownFiltersTemplate"></ng-container>
@@ -33,13 +33,13 @@
 </div>
 
 <div id="dropdown-filters-mobile"
-  class="d-flex flex-row bg-secondary align-items-center py-2  filter-row mt-3 px-2 flex-nowrap align-content-stretch flex-wrap"
+  class="d-flex flex-row bg-secondary align-items-center py-2  filter-row mt-3 px-2 flex-nowrap align-content-stretch flex-wrap flex-row-reverse"
   *ngIf="showFiltersBelow">
   <ng-container [ngTemplateOutlet]="dropdownFiltersTemplate"></ng-container>
 </div>
 
 <ng-template #dropdownFiltersTemplate>
-  <div class="dropdown order-2"
+  <div class="dropdown ms-3 order-2"
     id="providers-filter-dropdown">
     <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
       type="button"
@@ -56,7 +56,7 @@
       <span class="filter-toggle-icon"></span>
     </button>
 
-    <ul class="dropdown-menu py-0 dropdown-shadow"
+    <ul class="dropdown-menu py-0 dropdown-shadow dropdown-filters-list"
       aria-labelledby="dropdownMenuProviders">
       <li class="p-0">
         <button class="btn border-0 w-100 option-label t-left"

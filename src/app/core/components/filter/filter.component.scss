@@ -72,6 +72,7 @@
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  padding: 12px;
 }
 
 .button-toggler {
@@ -145,7 +146,6 @@
 @media only screen and (max-width: 1133px) {
   #dropdown-filters{
     flex: 50%;
-    flex-direction: row-reverse;
   }
 }
 
