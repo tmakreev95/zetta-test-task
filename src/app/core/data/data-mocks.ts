@@ -46,7 +46,6 @@ export const categories = [
     name: '20% Cash Back',
     gameIds: []
   }
-
 ]
 
 export const providers: IProvider[] = [
