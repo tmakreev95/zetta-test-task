@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IFilter, IGame, providers } from 'src/app/core/data/data-mocks';
+import { IFilter, IGame, providers, favorites, popular } from 'src/app/core/data/data-mocks';
 
 @Pipe({
   name: 'filterGames'
@@ -13,9 +13,17 @@ export class FilterGamesPipe implements PipeTransform {
     let result = value;
 
     if (!!filter && filter.category) {
-      result = result.filter(obj => {
-        return filter.category?.gameIds.includes(obj.id);
-      });
+      if (filter.category.id === 1) {
+        result = result.filter(obj => favorites.includes(obj.id));
+      }
+
+      if (filter.category.id === 2) {
+        result = result.filter(obj => popular.includes(obj.id));
+
+      }
+      if (![1, 2].includes(filter.category.id)) {
+        result = [];
+      }
     }
 
     if (!!filter && filter.provider) {

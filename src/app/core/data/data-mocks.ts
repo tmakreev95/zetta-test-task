@@ -24,7 +24,6 @@ export interface IProvider {
 export interface ICategory {
   id: number;
   name: string;
-  gameIds: string[]
 }
 
 export const favorites = ['0001', '0005', '0011'];
@@ -33,18 +32,15 @@ export const genres = ['slot', 'rulet', 'blackjack', 'poker'];
 export const categories = [
   {
     id: 1,
-    name: 'Favourites',
-    gameIds: ['0001', '0005', '0011']
+    name: 'Favourites'
   },
   {
     id: 2,
-    name: 'Popular',
-    gameIds: ['0001', '0002', '0005', '0012']
+    name: 'Popular'
   },
   {
     id: 3,
-    name: '20% Cash Back',
-    gameIds: []
+    name: '20% Cash Back'
   }
 ]
 
