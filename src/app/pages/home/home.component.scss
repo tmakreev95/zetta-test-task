@@ -13,3 +13,9 @@ img {
   width: 100%;
   border-radius: $imageBorderRadius;
 }
+
+@media only screen and (max-width: 390px) {
+ .game-col {
+  width: 100%;
+ }
+}

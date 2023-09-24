@@ -39,7 +39,7 @@
 </div>
 
 <ng-template #dropdownFiltersTemplate>
-  <div class="dropdown ms-3 order-2"
+  <div class="dropdown me-3 order-2"
     id="providers-filter-dropdown">
     <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
       type="button"
@@ -80,7 +80,7 @@
       </li>
     </ul>
   </div>
-  <div class="dropdown ms-3 order-1"
+  <div class="dropdown order-1"
     id="genres-filter-dropdown">
     <button class="btn btn-secondary dropdown-toggle dropdown-filter-border t-left button-toggler"
       type="button"
@@ -154,13 +154,13 @@
   </button>
   <div class="d-none d-lg-inline d-xl-inline"
     id="category-filter-holder">
-    <button class="btn btn-primary text-white border-0 py-2 me-1 rounded-element t-left"
+    <button class="btn btn-primary text-white border-0 py-2 me-1 rounded-element t-left category-filter-button"
       [ngClass]="!selectedCategory ? 'btn-primary' : 'btn-secondary'"
       (click)="setAllCategoryFilter()"
       type="button">
       All
     </button>
-    <button class="btn text-white border-0 py-2 me-1 rounded-element t-left"
+    <button class="btn text-white border-0 py-2 me-1 rounded-element t-left category-filter-button"
       *ngFor="let category of categories"
       (click)="setCategoryFilter(category)"
       [ngClass]="selectedCategory?.id === category.id  ? 'btn-primary' : 'btn-secondary'">
